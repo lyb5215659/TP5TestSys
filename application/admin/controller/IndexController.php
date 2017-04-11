@@ -12,17 +12,10 @@ class IndexController extends Controller
 
 
 	public function delete(){
-	// 获取要删除的对象
-		$Teacher = Teacher::get(17);
-
-        // 要删除的对象存在
-		if (!is_null($Teacher)) {
-            // 删除对象
-			if ($Teacher->delete()) {
-				return '删除成功';
-			}
-		}
-		return '删除失败';
+	// 直接删除相关关键字记录
+        $state = Teacher::destroy(15);
+        var_dump($state);
+        return '删除成功';
 	}
 
 
