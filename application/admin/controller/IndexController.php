@@ -13,9 +13,11 @@ class IndexController extends Controller
 
 	public function delete(){
 	// 直接删除相关关键字记录
-        $state = Teacher::destroy(15);
-        var_dump($state);
-        return '删除成功';
+        if ($count = Teacher::destroy(13))
+        {
+            return '成功删除' . $count . '条数据';
+        }
+        return '删除失败';
 	}
 
 
