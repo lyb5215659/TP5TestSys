@@ -4,11 +4,11 @@ use think\Validate;
 /**
 * 
 */
-class Teacher extends validate
+class Teacher extends Validate
 {
 	protected $rule = [
-		'email' => 'email' ;
-	]
+		'email' => 'email',
+	];
 	// function lists()
 	// {
 	// 	$list = Db::name('users')->select();

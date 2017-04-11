@@ -21,9 +21,14 @@ class IndexController extends Controller
 		$teacher->sex = $postData["sex"];
 		$teacher->email = $postData["email"];
 		$teacher->create_time = $postData["create_time"];//database.php 配置开启自动时间戳
-		$status=$teacher->save();
-		var_dump($status);
-		return "表单数据已提交到数据库,新增ID为：".$teacher->id;
+		$status=$teacher->validate(true)->save();
+		// $status=$teacher->validate($teacher)->save($teacher->getData());
+		// var_dump($status);
+		if(false==$status){
+			return '新增失败'.$teacher->getError();
+		}else{
+			return "表单数据已提交到数据库,新增ID为：".$teacher->id;
+		}
 
 		//①
 		// $teacher = array();
