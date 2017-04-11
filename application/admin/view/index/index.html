@@ -17,6 +17,7 @@
 					<th>创建时间</th>
 					<th>更新时间</th>
 					<th>用户名</th>
+					<th>操作</th>
 				</tr>
 				{volist name="teacher" id="teacher" key="key"}
 				<tr>
@@ -27,6 +28,7 @@
 					<td>{$teacher->getData('create_time')}</td>
 					<td>{$teacher->getData('update_time')}</td>
 					<td>{$teacher->getData('username')}</td>
+					<td><a href="delete?id={$teacher->getData('id')}">删除</a></td>
 				</tr>
 				{/volist}
 			</table>
