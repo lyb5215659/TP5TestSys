@@ -27,7 +27,7 @@ class IndexController extends Controller
 			if(!$res){
 				return "更新失败：".$teacher->getError();
 			}
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 			return "更新失败：".$e->getMessage();
 		}
 	}
