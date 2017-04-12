@@ -29,8 +29,9 @@
 					<td>{$teacher->getData('update_time')}</td>
 					<td>{$teacher->getData('username')}</td>
 					<td>
-    <a href="{:url('index/Teacher/delete?id=' . $teacher->getData('id'))}">删除1</a><a href="{:url('Teacher/delete?id=' . $teacher->getData('id'))}">删除2</a><a href="{:url('delete?id=' . $teacher->getData('id'))}">删除3</a>
+    <a href="{:url('index/Teacher/delete?id=' . $teacher->getData('id'))}">删除1</a>&nbsp;&nbsp;<a href="{:url('Teacher/delete?id=' . $teacher->getData('id'))}">删除2</a>&nbsp;&nbsp;<a href="{:url('delete?id=' . $teacher->getData('id'))}">删除3</a>&nbsp;&nbsp;<a href="{:url('edit?id='.$teacher->getData('id'))}">编辑</a>
 </td>
+
 				</tr>
 				{/volist}
 			</table>

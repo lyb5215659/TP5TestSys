@@ -10,13 +10,51 @@ use app\common\model\Teacher;
 class IndexController extends Controller
 {
 
+	public function update(){
+		// var_dump($_POST);
+		$teacher = new Teacher();
+		$updateDate = Request::Instance()->post();
+		// var_dump($updateDate);
+		// var_dump($updateDate["name"]);
+		$teacher->name = $updateDate["name"];
+		$teacher->sex = $updateDate["sex"];
+		$teacher->username = $updateDate["username"];
+		$teacher->email = $updateDate["email"];
+		$teacher->id = $updateDate["id"];
+		try {
+			$res=$teacher->validate(true)->isupdate(true)->save();
+			var_dump($res);
+			if(!$res){
+				return "更新失败：".$teacher->getError();
+			}
+		} catch (Exception $e) {
+			return "更新失败：".$e->getMessage();
+		}
+	}
+
+
+	public function edit(){
+		// var_dump(Request::Instance()->param());
+		// $id = Request::instance()->param('id/d');
+		$id = $this->request->param('id/d');
+		$teacher = Teacher::get($id);
+		if(is_null($teacher)){
+			return "未找到ID为：".$id."的信息";
+		}
+		$this->assign('teacher',$teacher);
+		$html=$this->fetch();
+		return $html;	
+		
+
+	}
+
 
 	public function delete(){
 	// 获取pathinfo传入的ID值.
         $id = Request::instance()->param('id/d'); // “/d”表示将数值转化为“整形”
 
         if (is_null($id) || 0 === $id) {
-            return $this->error('未获取到ID信息');
+        	return $this->error('未获取到ID信息');
         }
 
         // 获取要删除的对象
@@ -24,29 +62,29 @@ class IndexController extends Controller
 
         // 要删除的对象不存在
         if (is_null($Teacher)) {
-            return $this->error('不存在id为' . $id . '的教师，删除失败');
+        	return $this->error('不存在id为' . $id . '的教师，删除失败');
         }
 
         // 删除对象
         if (!$Teacher->delete()) {
-            return $this->error('删除失败:' . $Teacher->getError());
+        	return $this->error('删除失败:' . $Teacher->getError());
         }
 
         // 进行跳转
         return $this->success('删除成功', url('/admin'));
-	}
+    }
 
 
-	public function insert(){
+    public function insert(){
 
 // var_dump($_POST);
 
-		$postData = Request::Instance()->post();
-		$teacher = new Teacher();
-		$teacher->name = $postData['name'];
-		$teacher->username = $postData["username"];
-		$teacher->sex = $postData["sex"];
-		$teacher->email = $postData["email"];
+    	$postData = Request::Instance()->post();
+    	$teacher = new Teacher();
+    	$teacher->name = $postData['name'];
+    	$teacher->username = $postData["username"];
+    	$teacher->sex = $postData["sex"];
+    	$teacher->email = $postData["email"];
 		$teacher->create_time = $postData["create_time"];//database.php 配置开启自动时间戳
 		$status=$teacher->validate(true)->save();
 		// $status=$teacher->validate($teacher)->save($teacher->getData());
