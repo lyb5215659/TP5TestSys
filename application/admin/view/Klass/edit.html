@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>编辑班级信息</title>
+	<link rel="stylesheet" type="text/css" href="/static/bootstrap-3.3.7/dist/css/bootstrap.min.css">
+</head>
+<body class="container">
+	<h3>编辑班级信息</h3>
+	<div class="row">
+		<div class="col-md-12">
+			<form action="{:url('save')}" method="post">
+				<label>班级:</label>
+				<input type="hidden" name="id"  value="{$klass->getData('id')}" />
+				<input type="text" name="name"  value="{$klass->getData('name')}" />
+				<label>辅导员:</label>
+				<select name="teacher_id" id="teacher">
+					{volist name="teachers" id="_teacher"}
+					<option value="{$_teacher->getData('id')}" {eq name="$_teacher->getData('id')" value="$klass->getData('teacher_id')"} selected="selected" {/eq}>{$_teacher->getData('name')}</option>
+					{/volist}
+				</select>
+				<button type="submit"  class="btn btn-primary">保存</button>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

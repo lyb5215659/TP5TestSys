@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>蓝宇创智大学</title>
+	<link rel="stylesheet" type="text/css" href="/static/bootstrap-3.3.7/dist/css/bootstrap.min.css">
+</head>
+<body class="container">
+	<!-- <h4>欢迎 {$loginteacher} 登录到系统</h4> -->
+	<nav class="navbar navbar-default" role="navigation"> 
+		<div class="container-fluid"> 
+			<div class="navbar-header">
+				<a class="navbar-brand" href="{:url('index')}">蓝宇创智大学</a> 
+			</div> 
+			<ul class="nav navbar-nav navbar-right"> 
+				<li><a href="{:url('add')}"><span class="glyphicon glyphicon-user"></span> {:$loginteacher}</a></li> 
+				<li><a href="{:url('/admin/login/logout')}" ><span class="glyphicon glyphicon-log-in"></span> 登出</a></li> 
+			</ul> 
+			<!--向右对齐-->
+			<ul class="nav navbar-nav navbar-left">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						数据维护 <b class="caret"></b>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="{:url('teacher/index')}">教师管理</a></li>
+						<li class="divider"></li>
+						<li><a href="{:url('klass/index')}">班级管理</a></li>
+						<li class="divider"></li>
+						<li><a href="{:url('student/index')}">学生管理</a></li>
+						<li class="divider"></li>
+						<li><a href="{:url('course/index')}">课程管理</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div> 
+	</nav>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-4">
+					<form class="form-inline">
+						<div class="form-group">
+							<label class="sr-only" for="name">姓名</label>
+							<input name="name" type="text" class="form-control" placeholder="姓名...">
+						</div>
+						<button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i>&nbsp;查询</button>
+					</form>
+				</div>
+				<div class="col-md-8 text-right">
+					<a href="{:url('add')}" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i>&nbsp;增加</a>
+					<a href="{:url('deleteAll')}" class="btn btn-primary"><i class="glyphicon glyphicon-remove"></i>&nbsp;批量删除</a>
+				</div>
+			</div>
+			<hr />
+			<table class="table table-hover table-bordered">
+				<tr class="info">
+					<th><input type="checkbox" value="" class="checkAll">&nbsp;&nbsp;全选</th>
+					<th>序号</th>
+					<th>姓名</th>
+					<th>性别</th>
+					<th>邮箱</th>
+					<th>创建时间</th>
+					<th>更新时间</th>
+					<th>用户名</th>
+					<th>操作</th>
+				</tr>
+				{volist name="teachers" id="teacher" key="key"}
+				<tr>
+					<td><input type="checkbox" value="" class="teacherItem"></td>
+					<td>{$key}</td>
+					<td>{$teacher->getData('name')}</td>
+					<td>{eq name='teacher->getData("sex")' value='0'}男{else /}女{/eq}</td>
+					<td>{$teacher->getData('email')}</td>
+					<td>{$teacher->getData('create_time')}</td>
+					<td>{$teacher->getData('update_time')}</td>
+					<td>{$teacher->getData('username')}</td>
+					<td align="center">
+						<!--<a href="{:url('/admin/index/delete?id=' . $teacher->getData('id'))}">删除1</a>&nbsp;&nbsp;-->
+						<!--<a href="{:url('/admin/delete?id=' . $teacher->getData('id'))}">删除2</a>&nbsp;&nbsp;-->
+						<a class="btn btn-danger btn-sm" href="{:url('delete?id=' . $teacher->getData('id'))}"><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</a>&nbsp;
+						<a class="btn btn-primary btn-sm" href="{:url('edit?id=' . $teacher->getData('id'))}"><i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑</a>
+					</td>
+				</tr>
+				{/volist}
+			</table>
+			{$teachers->render()}
+		</div>
+	</div>
+	<script  src="/static/js/jquery.min.js"></script>
+	<script  src="/static/js/index.js"></script>
+	<script  src="/static/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

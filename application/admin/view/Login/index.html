@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="UTF-8">
+	<title>login</title>
+	<link rel="stylesheet" type="text/css" href="/static/bootstrap-3.3.7/dist/css/bootstrap.min.css">
+</head>
+<body class="container">
+	<div class="row">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					欢迎使用创智管理系统
+				</h3>
+			</div>
+			<div class="panel-body">
+				<div class="col-md-4"></div>
+				<div class="col-md-4">
+					<form action="{:url('login')}" method="post" class="form-group">
+						<label for="username">username:</label><input type="text" name="username" id="username" class="form-control" placeholder="输入用户名" />
+						<label for="password">password:</label><input type="password" name="password" id="password" class="form-control" placeholder="输入密码" />
+						<div class="checkbox">
+							<label>
+							<input type="checkbox">记住密码
+							</label>
+						</div>
+						<button type="submit" class="btn btn-primary btn-lg btn-block">登录系统</button>
+					</form>
+				</div>
+				<div class="col-md-4"></div>
+			</div>
+			<div class="panel-footer">Copyright © 2013-2018 创智软件  NewThings.com All Rights Reserved. 备案号：陕ICP备15012807号-1</div>
+		</div>
+		
+		
+	</div>
+</body>
+</html>
